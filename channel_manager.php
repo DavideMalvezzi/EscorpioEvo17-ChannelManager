@@ -23,6 +23,16 @@
     $response["count"] = $count;
     $response["channels"] = $channels;
   }
+  else if($request->cmd === "delete"){
+    $sql = "DELETE FROM channel WHERE can_id = " . $request->id;
+    if($conn->query($sql) === TRUE){
+      $response["result"] = "ok";
+    }
+    else{
+      $response["result"] = "error";
+      $response["error"] = $conn->error;
+    }
+  }
 
   print json_encode($response);
 

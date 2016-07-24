@@ -30,6 +30,11 @@
     $(function() {
       reloadChannelsTable();
     });
+
+    function showRemoveChannelDialog(channelID){
+      selectedChannelID = channelID;
+      $("#remove-channel-modal").modal();
+    }
   </script>
 
 </head>
@@ -56,6 +61,7 @@
           <table class="table table-bordered" id="channel-table">
             <thead>
               <tr>
+                <th>Edit</th>
                 <th>CAN ID</th>
                 <th>Name</th>
                 <th>Type</th>
@@ -67,6 +73,7 @@
                 <th>Description</th>
               </tr>
             </thead>
+
             <tbody id="channel-table-body">
 
             </tbody>
@@ -75,6 +82,31 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- Modal -->
+  <div id="remove-channel-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Remove</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>Do you want to remove this channel?</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeChannel()">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!--db disconnection-->
