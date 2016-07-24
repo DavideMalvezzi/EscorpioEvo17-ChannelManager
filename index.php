@@ -31,11 +31,11 @@
     <div class="row">
       <div class="col-xs-12">
         <button type="button" class="btn btn-primary" onclick="addChannel()">
-          <span class="glyphicon glyphicon-plus"></span>Add new channel
+          <span class="glyphicon glyphicon-plus"></span>&#160;Add new channel
         </button>
 
         <button type="button" class="btn btn-primary" onClick="downloadCfg()">
-          <span class="glyphicon glyphicon-download"></span>Download CFG file
+          <span class="glyphicon glyphicon-download-alt"></span>&#160;Download CFG file
         </button>
       </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="table-responsive">
-          <table class="table table-striped table-hover table-bordered" id="channel-table">
+          <table class="table table-bordered" id="channel-table">
             <thead>
               <tr>
                 <th>CAN ID</th>
@@ -58,6 +58,11 @@
               </tr>
             </thead>
             <tbody>
+              <tr><td>ciao</td></tr>
+              <tr><td>ciao</td></tr>
+              <tr><td>ciao</td></tr>
+              <tr><td>ciao</td></tr>
+              <tr><td>ciao</td></tr>
             </tbody>
           </table>
         </div>

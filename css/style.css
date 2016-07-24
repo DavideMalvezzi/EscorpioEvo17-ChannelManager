@@ -1,3 +1,34 @@
+
 .row{
-  margin-top: 8px;
+  background-color: #1d1d1d;
+  border-radius: 10px;
+  margin: 8px 0px 8px 0px;
+}
+
+.col-xs-12{
+  padding: 8px;
+}
+
+body{
+  background-color: #373737;
+}
+
+table{
+  color: white;
+}
+
+table thead th{
+  text-align: center;
+}
+
+table tbody tr:nth-child(even) td, thead{
+  background-color: #373737;
+}
+
+table tbody tr:nth-child(odd) td{
+  background-color: #424242;
+}
+
+table tbody tr:hover td{
+  background-color: #606060;
 }
