@@ -67,12 +67,8 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><td>ciao</td></tr>
-              <tr><td>ciao</td></tr>
-              <tr><td>ciao</td></tr>
-              <tr><td>ciao</td></tr>
-              <tr><td>ciao</td></tr>
+            <tbody id="channel-table-body">
+
             </tbody>
           </table>
         </div>

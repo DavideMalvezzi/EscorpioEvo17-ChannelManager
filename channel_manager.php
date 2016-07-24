@@ -9,18 +9,18 @@
 
   //Get all channels data
   if($request->cmd === "get_all"){
-    $i = 0;
-    $sql = "SELECT * FROM channel ORDER BY id ASC";
+    $count = 0;
+    $sql = "SELECT * FROM channel ORDER BY can_id ASC";
     $result = $conn->query($sql);
-
     $channels = array();
-    while($row = $result->fetch_assoc()) {
+
+    while(($row = $result->fetch_assoc())) {
         $channels[] = $row;
-        $i++;
+        $count++;
     }
 
     $response["result"] = "ok";
-    $response["count"] = $i;
+    $response["count"] = $count;
     $response["channels"] = $channels;
   }
 
