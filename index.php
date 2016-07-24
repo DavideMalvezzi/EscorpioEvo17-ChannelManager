@@ -16,11 +16,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+  <!--custom js-->
+  <script src="js/channel_manager.js"></script>
+
+  <!-- db connection-->
   <?php
     include("db_access.php");
 
     connectToDb();
   ?>
+
+  <script>
+    $(function() {
+      reloadChannelsTable();
+    });
+  </script>
 
 </head>
 
@@ -71,6 +81,7 @@
 
   </div>
 
+  <!--db disconnection-->
   <?php
     disconnectFromDb();
   ?>
