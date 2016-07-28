@@ -35,6 +35,17 @@
       selectedChannelID = channelID;
       $("#remove-channel-modal").modal();
     }
+
+    function showAddChannelDialog(){
+      selectedChannelID = undefined;
+      $("#edit-channel-modal").modal();
+    }
+
+    function showEditChannelDialog(channelID){
+      selectedChannelID = channelID;
+      $("#edit-channel-modal").modal();
+    }
+
   </script>
 
 </head>
@@ -45,7 +56,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary" onclick="addChannel()">
+        <button type="button" class="btn btn-primary" onclick="showAddChannelDialog()">
           <span class="glyphicon glyphicon-plus"></span>&#160;Add new channel
         </button>
 
@@ -84,11 +95,10 @@
 
   </div>
 
-  <!-- Modal -->
+  <!--delete modal-->
   <div id="remove-channel-modal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
 
-      <!-- Modal content-->
       <div class="modal-content">
 
         <div class="modal-header">
@@ -106,6 +116,41 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!--edit modal-->
+  <div id="edit-channel-modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit</h4>
+        </div>
+
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+
+              <label for="channel-id" class="control-label col-sm-1">ID (hex):</label>
+              <div class="col-sm-11">
+                <input type="text" id="channel-id" class="form-control" maxlength="4">
+              </div>
+
+              <label for="channel-name" class="control-label col-sm-1">Name:</label>
+              <div class="col-sm-11">
+                <input type="text" id="channel-name" class="form-control">
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addNewChannel()">OK</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+
+      </div>
     </div>
   </div>
 
