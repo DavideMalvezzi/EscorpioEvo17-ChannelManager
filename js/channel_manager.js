@@ -41,7 +41,35 @@ function reloadChannelsTable(){
 }
 
 function addNewChannel(){
+  var request = {};
+  request['cmd'] = 'add_new';
+  request['id'] = parseInt($("#channel-id").val(), 16);
+  request['name'] = $("#channel-name").val().replace(/\s+/g, '');
+  request['type'] = $("#channel-type").val();
+  request['size'] = $("#channel-size").val();
+  request['def'] = $("#channel-def").val();
+  request['min'] = $("#channel-min").val();
+  request['max'] = $("#channel-max").val();
+  request['formula'] = $("#channel-formula").val();
+  request['desc'] = $("#channel-desc").val();
 
+  if(request['id'] === NaN){
+    setError("#channel-id", true);
+    return false;
+  }
+
+  if(request['name'].length == 0){
+    setError("#channel-name", true);
+    return false;
+  }
+
+/*
+  $.ajax({
+    type: 'post',
+    url: 'channel_manager.php',
+    dataType: 'json',
+  });
+  */
 }
 
 function updateChannel(){

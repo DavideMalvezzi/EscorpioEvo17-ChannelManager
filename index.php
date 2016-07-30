@@ -6,6 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link href="img/favicon.ico" rel="icon" type="image/vnd.microsoft.icon">
+
   <!--bootstrap css-->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -17,6 +19,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <!--custom js-->
+  <script src="js/bootstrap-utils.js"></script>
   <script src="js/channel_manager.js"></script>
 
   <!-- db connection-->
@@ -38,12 +41,47 @@
 
     function showAddChannelDialog(){
       selectedChannelID = undefined;
+      $("#channel-id").val("");
+      $("#channel-name").val("");
+      $("#channel-type").val("B");
+      $("#channel-size").val("1");
+      $("#channel-min").val("");
+      $("#channel-max").val("");
+      $("#channel-def").val("");
+      $("#channel-formula").val("");
+      $("#channel-desc").val("");
+
       $("#edit-channel-modal").modal();
     }
 
     function showEditChannelDialog(channelID){
       selectedChannelID = channelID;
+
+      i = 0;
+      while(i < channels.length && channels[i].can_id != channelID)i++;
+
+      $("#channel-id").val(channels[i].can_id.toString(16));
+      $("#channel-name").val(channels[i].name);
+      $("#channel-type").val(channels[i].type);
+      $("#channel-size").val("1");
+      $("#channel-min").val("");
+      $("#channel-max").val("");
+      $("#channel-def").val("");
+      $("#channel-formula").val("");
+      $("#channel-desc").val("");
+
       $("#edit-channel-modal").modal();
+    }
+
+    function saveChannelEdits(){
+      if(selectedChannelID === undefined){
+        if(addNewChannel()){
+          $("#edit-channel-modal").modal();
+        }
+      }
+      else{
+        updateChannel();
+      }
     }
 
   </script>
@@ -173,23 +211,23 @@
             </div>
 
             <div class="form-group">
-              <label for="channel-def-value" class="control-label col-xs-2">Default:</label>
+              <label for="channel-def" class="control-label col-xs-2">Default:</label>
               <div class="col-xs-10">
-                <input type="text" class="form-control" id="channel-def-value">
+                <input type="text" class="form-control" id="channel-def">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="channel-min-value" class="control-label col-xs-2">Min:</label>
+              <label for="channel-min" class="control-label col-xs-2">Min:</label>
               <div class="col-xs-10">
-                <input type="text" class="form-control" id="channel-min-value">
+                <input type="text" class="form-control" id="channel-min">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="channel-max-value" class="control-label col-xs-2">Max:</label>
+              <label for="channel-max" class="control-label col-xs-2">Max:</label>
               <div class="col-xs-10">
-                <input type="text" class="form-control" id="channel-max-value">
+                <input type="text" class="form-control" id="channel-max">
               </div>
             </div>
 
@@ -201,16 +239,16 @@
             </div>
 
             <div class="form-group">
-              <label for="channel-description" class="control-label col-xs-2">Max:</label>
+              <label for="channel-desc" class="control-label col-xs-2">Description:</label>
               <div class="col-xs-10">
-                <input type="text" class="form-control" id="channel-description">
+                <input type="text" class="form-control" id="channel-desc">
               </div>
             </div>
 
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onClick="">Save</button>
+          <button type="button" class="btn btn-default" onClick="saveChannelEdits()">Save</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
