@@ -1,16 +1,19 @@
 
 <?php
-  require("db_access.php");
+  require('db_access.php');
 
   connectToDb();
 
-  $request = json_decode($_POST["request"]);
+  $request = json_decode($_POST['request']);
   $response = array();
 
   //Get all channels data
-  if($request->cmd === "get_all"){
+  if($request->cmd === 'get_all'){
     $count = 0;
-    $sql = "SELECT * FROM channel ORDER BY can_id ASC";
+    $sql = 'SELECT */*CONV(can_id, 10, 16) AS can_id, name, type, size, def_value, min_value, max_value, formula, description*/
+            FROM channel
+            ORDER BY can_id ASC';
+
     $result = $conn->query($sql);
     $channels = array();
 
@@ -19,18 +22,41 @@
         $count++;
     }
 
-    $response["result"] = "ok";
-    $response["count"] = $count;
-    $response["channels"] = $channels;
+    $response['result'] = 'ok';
+    $response['count'] = $count;
+    $response['channels'] = $channels;
   }
-  else if($request->cmd === "delete"){
-    $sql = "DELETE FROM channel WHERE can_id = " . $request->id;
+
+  else if($request->cmd === 'delete'){
+    $sql = 'DELETE FROM channel WHERE can_id = ' . $request->id;
+
     if($conn->query($sql) === TRUE){
-      $response["result"] = "ok";
+      $response['result'] = 'ok';
     }
     else{
-      $response["result"] = "error";
-      $response["error"] = $conn->error;
+      $response['result'] = 'error';
+      $response['error'] = $conn->error;
+    }
+  }
+
+  else if($request->cmd === 'add_new'){
+    $sql = 'INSERT INTO channel VALUES(' .
+              $request->id . ',' .
+              '"' . $request->name . '",' .
+              '"' . $request->type . '",' .
+              $request->size . ',' .
+              '"' . $request->def . '",' .
+              '"' . $request->min . '",' .
+              '"' . $request->max . '",' .
+              '"' . $request->formula . '",' .
+              '"' . $request->desc . '")';
+
+    if($conn->query($sql) === TRUE){
+      $response['result'] = 'ok';
+    }
+    else{
+      $response['result'] = 'error';
+      $response['error'] = $conn->error;
     }
   }
 

@@ -36,6 +36,9 @@ function reloadChannelsTable(){
               $('#channel-table-body').append(row);
           }
         }
+        else{
+          console.log(response.error);
+        }
       }
   });
 }
@@ -43,7 +46,7 @@ function reloadChannelsTable(){
 function addNewChannel(){
   var request = {};
   request['cmd'] = 'add_new';
-  request['id'] = parseInt($("#channel-id").val(), 16);
+  request['id'] = parseInt($("#channel-id").val());
   request['name'] = $("#channel-name").val().replace(/\s+/g, '');
   request['type'] = $("#channel-type").val();
   request['size'] = $("#channel-size").val();
@@ -53,23 +56,49 @@ function addNewChannel(){
   request['formula'] = $("#channel-formula").val();
   request['desc'] = $("#channel-desc").val();
 
-  if(request['id'] === NaN){
+  if(isNaN(request['id'])){
     setError("#channel-id", true);
+    $("#edit-channel-modal-error").show();
+    $("#edit-channel-modal-error-text").text("Invalid ID");
     return false;
+  }
+  else{
+    setError("#channel-id", false);
   }
 
   if(request['name'].length == 0){
     setError("#channel-name", true);
+    $("#edit-channel-modal-error").show();
+    $("#edit-channel-modal-error-text").text("Invalid name");
     return false;
   }
+  else{
+    setError("#channel-name", false);
+  }
 
-/*
   $.ajax({
     type: 'post',
     url: 'channel_manager.php',
     dataType: 'json',
+    data: {'request' : JSON.stringify(request)},
+    success: function(response){
+      if(response.result === 'ok'){
+        $("#edit-channel-modal").modal('hide');
+        reloadChannelsTable();
+      }
+      else{
+        console.log(response.error);
+        $("#edit-channel-modal-error").show();
+        $("#edit-channel-modal-error-text").text(response.error);
+      }
+    },
+    error: function(){
+      $("#edit-channel-modal-error").show();
+      $("#edit-channel-modal-error-text").text("Connection error");
+    }
   });
-  */
+
+  return true;
 }
 
 function updateChannel(){
@@ -88,9 +117,16 @@ function removeChannel(){
     success: function(response){
       if(response.result === "ok"){
         reloadChannelsTable();
+        $("#remove-channel-modal").modal('hide');
       }else{
         console.log(response.error);
+        $("#remove-channel-modal-error-text").text(response.error);
+        $("#remove-channel-modal-error").show();
       }
+    },
+    error: function(){
+      $("#remove-channel-modal-error-text").text(response.error);
+      $("#remove-channel-modal-error").show();
     }
   });
 }
