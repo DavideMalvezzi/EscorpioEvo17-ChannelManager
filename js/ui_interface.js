@@ -59,3 +59,7 @@ function saveChannelEdits(){
     updateChannel();
   }
 }
+
+function downloadCfg(){
+  window.location = "download_cfg.php";
+}

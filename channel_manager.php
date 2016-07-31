@@ -2,9 +2,6 @@
 <?php
   require('db_access.php');
 
-  define('PROPS_PER_CHANNEL', 4);
-  define('CFG_FILE_PATH', "CHANNELS.CFG");
-
   connectToDb();
 
   $request = json_decode($_POST['request']);
@@ -63,7 +60,7 @@
     }
   }
 
-  else if($request->cmd === "update"){
+  else if($request->cmd === 'update'){
     $sql = 'UPDATE channel SET ' .
               'can_id = ' . $request->id . ', ' .
               'name = "' . $request->name . '", ' .
@@ -83,22 +80,6 @@
       $response['result'] = 'error';
       $response['error'] = $conn->error;
     }
-  }
-  else if($request->cmd === "download"){
-    $cfgFile = fopen("testfile.txt", "w");
-
-    $sql = "SELECT can_id, name, size, type
-            FROM channel
-            ORDER BY can_id ASC"
-
-    $result = $conn->query($sql);
-
-    fwrite("PROPS=" . $result->num_rows * PROPS_PER_CHANNEL)
-
-    while($row = $result->fetch_assoc()){
-      fwrite($cfgFile, ID)
-    }
-
   }
 
   print json_encode($response);
