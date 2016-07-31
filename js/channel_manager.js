@@ -46,6 +46,17 @@ function reloadChannelsTable(){
 function addNewChannel(){
   var request = {};
   request['cmd'] = 'add_new';
+  sendChannelInfo(request);
+}
+
+function updateChannel(){
+  var request = {};
+  request['cmd'] = 'update';
+  request['old_id'] = selectedChannelID;
+  sendChannelInfo(request);
+}
+
+function sendChannelInfo(request){
   request['id'] = parseInt($("#channel-id").val());
   request['name'] = $("#channel-name").val().replace(/\s+/g, '');
   request['type'] = $("#channel-type").val();
@@ -60,7 +71,7 @@ function addNewChannel(){
     setError("#channel-id", true);
     $("#edit-channel-modal-error").show();
     $("#edit-channel-modal-error-text").text("Invalid ID");
-    return false;
+    return;
   }
   else{
     setError("#channel-id", false);
@@ -70,7 +81,7 @@ function addNewChannel(){
     setError("#channel-name", true);
     $("#edit-channel-modal-error").show();
     $("#edit-channel-modal-error-text").text("Invalid name");
-    return false;
+    return;
   }
   else{
     setError("#channel-name", false);
@@ -97,13 +108,8 @@ function addNewChannel(){
       $("#edit-channel-modal-error-text").text("Connection error");
     }
   });
-
-  return true;
 }
 
-function updateChannel(){
-
-}
 
 function removeChannel(){
   var request = {};
