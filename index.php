@@ -47,11 +47,11 @@
     <div class="row">
       <div class="col-xs-12">
         <button type="button" class="btn btn-primary" onclick="showAddChannelDialog()">
-          <span class="glyphicon glyphicon-plus"></span>&#160;Add new channel
+          <span class="glyphicon glyphicon-plus"></span>&#160;Add channel
         </button>
 
         <button type="button" class="btn btn-primary" onClick="downloadCfg()">
-          <span class="glyphicon glyphicon-download-alt"></span>&#160;Download CFG file
+          <span class="glyphicon glyphicon-download-alt"></span>&#160;Download CFG
         </button>
       </div>
     </div>
@@ -130,7 +130,7 @@
           </div>
 
           <div class="form-group">
-            <label for="channel-id" class="control-label col-xs-2">ID (hex):</label>
+            <label for="channel-id" class="control-label col-xs-2">ID:</label>
             <div class="col-xs-10">
               <input type="text" id="channel-id" class="form-control" maxlength="4">
             </div>

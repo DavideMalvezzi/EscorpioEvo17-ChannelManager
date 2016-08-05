@@ -61,5 +61,18 @@ function saveChannelEdits(){
 }
 
 function downloadCfg(){
-  window.location = "download_cfg.php";
+  $.ajax({
+      type: 'post',
+      url: 'download_cfg.php',
+      success: function(response){
+        var properties = {type: 'plain/text'}; // Specify the file's mime-type.
+        var file = new File([response], "CHANNELS.CFG", properties);
+        var link = document.createElement("a");
+        link.download = "CHANNELS.CFG";
+        link.href = URL.createObjectURL(file);
+        link.click();
+      }
+  });
+
+  //window.location = "download_cfg.php";
 }

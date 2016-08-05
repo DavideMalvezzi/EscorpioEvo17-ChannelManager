@@ -15,6 +15,19 @@
 
   $result = $conn->query($sql);
 
+  echo 'PROPS=' . $result->num_rows * PROPS_PER_CHANNEL . PHP_EOL;
+
+  $i = 0;
+  while($row = $result->fetch_assoc()){
+    echo '###CH' . $i . '###' . PHP_EOL;
+    echo 'CH_ID=' . $row['can_id'] . PHP_EOL;
+    echo 'CH_NAME=' . $row['name'] . PHP_EOL;
+    echo 'CH_SIZE=' . $row['size'] . PHP_EOL;
+    echo 'CH_TYPE=' . $row['type'] . PHP_EOL;
+    $i++;
+  }
+
+/*
   fwrite($cfgFile, 'PROPS=' . $result->num_rows * PROPS_PER_CHANNEL . PHP_EOL);
 
   $i = 0;
@@ -38,6 +51,7 @@
     header('Content-Length: ' . filesize(CFG_FILE_PATH));
     readfile(CFG_FILE_PATH);
   }
+  */
 
   disconnectFromDb();
 
