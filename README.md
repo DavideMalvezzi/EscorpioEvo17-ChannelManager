@@ -15,5 +15,5 @@ Each channels is described by:
 operator/function used in JavaScript. To refer to the received value inside the formula use the 'x' variable.
 - an optional description.
 
-It's possible to add a new channel or remove/edit an existant one.
+It's possible to add a new channel or remove/edit an existent one.
 Also, the CHANNELS.CFG file for the [EscorpioEvo16-Dashboard](https://github.com/DavideMalvezzi/EscorpioEvo16-Dashboard) can be downloaded.
